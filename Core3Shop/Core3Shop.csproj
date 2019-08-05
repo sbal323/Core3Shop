@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-Core3Shop-F8A20AC6-8E4F-4BB6-BE35-5DDFB04D54C7</UserSecretsId>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview7.19362.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0-preview7.19362.6" />
+  </ItemGroup>
+
+</Project>
