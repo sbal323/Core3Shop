@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core3Shop.Data
+namespace Core3Shop.Dal.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core3Shop.Dal\Core3Shop.Dal.csproj" />
-    <ProjectReference Include="..\Core3Shop.Utility\Core3Shop.Utility.csproj" />
   </ItemGroup>
 
 </Project>
