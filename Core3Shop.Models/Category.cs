@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core3Shop.Models
 {
-    class Category
+    public class Category
     {
         [Key]
         public int Id { get; set; }

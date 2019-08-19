@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core3Shop.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,6 @@ namespace Core3Shop.Dal.Data
             : base(options)
         {
         }
+        public DbSet<Category> Categories { get; set; }
     }
 }
