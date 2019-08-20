@@ -7,6 +7,7 @@ namespace Core3Shop.Dal.Data.Repositary.Contracts
     public interface IUnitOfWork
     {
         ICategoryRepository Categories { get;  }
+        IFrequencyRepository Frequencies { get; }
 
         void Save();
     }

@@ -24,18 +24,15 @@ namespace Core3Shop.Dal.Data.Repositary
         {
             dbSet.Add(entity);
         }
-
         public void AddRange(IEnumerable<T> entities)
         {
             dbSet.AddRange(entities);
         }
-
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
             IQueryable<T> query = dbSet.Where(predicate);
             return query.ToList();
         }
-
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -56,30 +53,33 @@ namespace Core3Shop.Dal.Data.Repositary
                 return query.ToList();
             }
         }
-
         public T Get(int id)
         {
             return dbSet.Find(id);
         }
-
         public IEnumerable<T> GetAll()
         {
             return dbSet.ToList();
         }
-
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
         }
-
         public void Remove(int id)
         {
             dbSet.Remove(Get(id));
         }
-
         public void RemoveRange(IEnumerable<T> entities)
         {
             dbSet.RemoveRange(entities);
+        }
+        public void Update(T entity)
+        {
+            dbSet.Update(entity);
+        }
+        public void UpdateRange(IEnumerable<T> entities)
+        {
+            dbSet.UpdateRange(entities);
         }
     }
 }

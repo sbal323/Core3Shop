@@ -13,8 +13,10 @@ namespace Core3Shop.Dal.Data.Repositary
         {
             _dbContext = dbContext;
             Categories = new CategoryRepository(_dbContext);
+            Frequencies = new FrequencyRepository(_dbContext);
         }
         public ICategoryRepository Categories {get; private set;}
+        public IFrequencyRepository Frequencies { get; private set; }
 
         public void Save()
         {

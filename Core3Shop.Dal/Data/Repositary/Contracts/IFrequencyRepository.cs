@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Core3Shop.Dal.Data.Repositary.Contracts
 {
-    public interface ICategoryRepository: IRepository<Category>
+    public interface IFrequencyRepository : IRepository<Frequency>
     {
-        IEnumerable<Category> GetTopCategories(int top);
     }
 }

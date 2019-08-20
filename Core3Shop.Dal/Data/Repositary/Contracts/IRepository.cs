@@ -18,5 +18,8 @@ namespace Core3Shop.Dal.Data.Repository.Contracts
         void Remove(int id);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
+
+        void Update(T entity);
+        void UpdateRange(IEnumerable<T> entities);
     }
 }

@@ -7,21 +7,21 @@ $(function(){
 function loadDataTable() {
     datatable = $("#tblData").DataTable({
         "ajax": {
-            "url": "/Admin/Category/GetAll",
+            "url": "/Admin/Frequency/GetAll",
             "type": "GET",
             "datatype":"json"
         },
         "columns": [
             { "data": "name", "width": "50%" },
-            { "data": "displayOrder", "width": "20%" },
+            { "data": "timesPerYear", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Admin/Category/Upsert/${data}" class="btn btn-success text-white">
+                                <a href="/Admin/Frequency/Upsert/${data}" class="btn btn-success text-white">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a onclick=onDelete("/Admin/Category/Delete/${data}") href="#" class="btn btn-danger text-white">
+                                <a onclick=onDelete("/Admin/Frequency/Delete/${data}") href="#" class="btn btn-danger text-white">
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                             </div>`;
