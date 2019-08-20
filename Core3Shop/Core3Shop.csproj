@@ -20,12 +20,12 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
+    <ProjectReference Include="..\Core3Shop.Dal\Core3Shop.Dal.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Core3Shop.Dal\Core3Shop.Dal.csproj" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

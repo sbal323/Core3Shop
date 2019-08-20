@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core3Shop.Utility.Consts
 {
-    public class Areas
+    public class AreaNames
     {
         public const string Customer = "Customer";
         public const string Admin = "Admin";

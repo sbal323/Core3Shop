@@ -10,7 +10,7 @@ using Core3Shop.Utility.Consts;
 
 namespace Core3Shop.Controllers
 {
-    [Area(Areas.Customer)]
+    [Area(AreaNames.Customer)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
