@@ -14,5 +14,6 @@ namespace Core3Shop.Dal.Data
         {
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Frequency> Frequencies { get; set; }
     }
 }
