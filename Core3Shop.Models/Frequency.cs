@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Core3Shop.Models
 {
-    public class Frequency
+    public class Frequency: DictionaryBase
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         [Display(Name="Frequency Name")]
         public string Name { get; set; }

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core3Shop.Models", "Core3Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core3Shop.Utility", "Core3Shop.Utility\Core3Shop.Utility.csproj", "{104B4CDF-090F-45C1-9982-49AE4D70F03F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core3Shop.Bl", "Core3Shop.Bl\Core3Shop.Bl.csproj", "{A8B56FB0-3D2F-4774-8991-B792C0CC6717}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{104B4CDF-090F-45C1-9982-49AE4D70F03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104B4CDF-090F-45C1-9982-49AE4D70F03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104B4CDF-090F-45C1-9982-49AE4D70F03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B56FB0-3D2F-4774-8991-B792C0CC6717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B56FB0-3D2F-4774-8991-B792C0CC6717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B56FB0-3D2F-4774-8991-B792C0CC6717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B56FB0-3D2F-4774-8991-B792C0CC6717}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

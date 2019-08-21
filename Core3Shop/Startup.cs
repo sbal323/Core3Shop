@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Core3Shop.Dal.Data.Repositary.Contracts;
 using Core3Shop.Dal.Data.Repositary;
+using Core3Shop.Bl.Contracts;
+using Core3Shop.Bl;
+using Core3Shop.Models;
 
 namespace Core3Shop
 {
@@ -38,7 +41,12 @@ namespace Core3Shop
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
 
+            //Inject Dal
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //Inject Bl
+            services.AddScoped<IBlCategory, BlCategory>();
+            services.AddScoped<IBlDictionary<Frequency>, BlDictionary<Frequency>>();
+            services.AddScoped<IBlDictionary<Service>, BlDictionary<Service>>();
 
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();

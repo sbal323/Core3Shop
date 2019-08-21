@@ -6,16 +6,17 @@ using Core3Shop.Dal.Data.Repositary.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Core3Shop.Utility.Consts;
 using Core3Shop.Models;
+using Core3Shop.Bl.Contracts;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
     [Area(AreaNames.Admin)]
     public class FrequencyController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public FrequencyController(IUnitOfWork unitOfWork)
+        private readonly IBlDictionary<Frequency> _blFrequency;
+        public FrequencyController(IBlDictionary<Frequency> blFrequency)
         {
-            _unitOfWork = unitOfWork;
+            _blFrequency = blFrequency;
         }
         public IActionResult Index()
         {
@@ -27,7 +28,7 @@ namespace Core3Shop.Areas.Admin.Controllers
             var frequency = new Frequency();
             if (id != null)
             {
-                frequency = _unitOfWork.Frequencies.Get(id.Value);
+                frequency = _blFrequency.Get(id.Value);
                 if (frequency == null)
                 {
                     return NotFound();
@@ -41,16 +42,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                if (frequency.Id == 0)
-                {
-                    _unitOfWork.Frequencies.Add(frequency);
-                }
-                else
-                {
-                    _unitOfWork.Frequencies.Update(frequency);
-                }
-                _unitOfWork.Save();
+                _blFrequency.Save(frequency);
                 return RedirectToAction(nameof(Index));
             }
             return View(frequency);
@@ -59,18 +51,17 @@ namespace Core3Shop.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _unitOfWork.Frequencies.GetAll() });
+            return Json(new { data = _blFrequency.GetAll() });
         }
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var frequency = _unitOfWork.Frequencies.Get(id);
+            var frequency = _blFrequency.Get(id);
             if(frequency == null)
             {
                 return Json(new { success = false, message = "Frequency does not exists" });
             }
-            _unitOfWork.Frequencies.Remove(frequency);
-            _unitOfWork.Save();
+            _blFrequency.Delete(id);
 
             return Json(new { success = true, message = "Frequency deleted successfully", frequency });
         }

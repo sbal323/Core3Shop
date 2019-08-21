@@ -6,10 +6,8 @@ using System.Text;
 
 namespace Core3Shop.Models
 {
-    public class Service
+    public class Service: DictionaryBase
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Service Name")]

@@ -6,16 +6,17 @@ using Core3Shop.Dal.Data.Repositary.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Core3Shop.Utility.Consts;
 using Core3Shop.Models;
+using Core3Shop.Bl.Contracts;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
     [Area(AreaNames.Admin)]
     public class CategoryController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(IUnitOfWork unitOfWork)
+        private readonly IBlCategory _blCategory;
+        public CategoryController(IBlCategory blCategory)
         {
-            _unitOfWork = unitOfWork;
+            _blCategory = blCategory;
         }
         public IActionResult Index()
         {
@@ -27,7 +28,7 @@ namespace Core3Shop.Areas.Admin.Controllers
             var category = new Category();
             if (id != null)
             {
-                category = _unitOfWork.Categories.Get(id.Value);
+                category = _blCategory.Get(id.Value);
                 if (category == null)
                 {
                     return NotFound();
@@ -41,16 +42,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                if (category.Id == 0)
-                {
-                    _unitOfWork.Categories.Add(category);
-                }
-                else
-                {
-                    _unitOfWork.Categories.Update(category);
-                }
-                _unitOfWork.Save();
+                _blCategory.Save(category);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -59,18 +51,17 @@ namespace Core3Shop.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _unitOfWork.Categories.GetAll() });
+            return Json(new { data = _blCategory.GetAll() });
         }
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var category = _unitOfWork.Categories.Get(id);
+            var category = _blCategory.Get(id);
             if(category == null)
             {
                 return Json(new { success = false, message = "Category does not exists" });
             }
-            _unitOfWork.Categories.Remove(category);
-            _unitOfWork.Save();
+            _blCategory.Delete(id);
 
             return Json(new { success = true, message = "Category deleted successfully", category });
         }
