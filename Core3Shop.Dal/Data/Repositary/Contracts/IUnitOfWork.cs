@@ -13,5 +13,6 @@ namespace Core3Shop.Dal.Data.Repositary.Contracts
         IRepository<Service> Services { get; }
 
         void Save();
+        IRepository<T> GetDictionaryRepositary<T>() where T : DictionaryBase;
     }
 }

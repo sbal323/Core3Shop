@@ -15,7 +15,7 @@ namespace Core3Shop.Bl
         {
             _unitOfWork = unitOfWork;
 
-            _repository = unitOfWork.GetRepositary<T>();
+            _repository = unitOfWork.GetDictionaryRepositary<T>();
         }
         public void Save(T entity)
         {
