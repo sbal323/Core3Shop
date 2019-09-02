@@ -19,7 +19,8 @@ namespace Core3Shop.Dal.Data.Repositary
             Repositories = new Dictionary<Type, object>
             {
                 { typeof(Repository<Frequency>), Frequencies },
-                { typeof(Repository<Service>), Services }
+                { typeof(Repository<Service>), Services },
+                { typeof(Repository<Category>), Categories }
             };
         }
         public ICategoryRepository Categories { get; private set; }

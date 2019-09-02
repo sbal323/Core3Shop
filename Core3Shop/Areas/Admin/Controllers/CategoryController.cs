@@ -13,8 +13,8 @@ namespace Core3Shop.Areas.Admin.Controllers
     [Area(AreaNames.Admin)]
     public class CategoryController : Controller
     {
-        private readonly IBlCategory _blCategory;
-        public CategoryController(IBlCategory blCategory)
+        private readonly IBlDictionary<Category> _blCategory;
+        public CategoryController(IBlDictionary<Category> blCategory)
         {
             _blCategory = blCategory;
         }

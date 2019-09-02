@@ -33,10 +33,13 @@ namespace Core3Shop.Dal.Data.Repositary
             IQueryable<T> query = dbSet.Where(predicate);
             return query.ToList();
         }
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includeProperties = null)
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-            query = query.Where(predicate);
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
             if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties)

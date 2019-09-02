@@ -44,9 +44,10 @@ namespace Core3Shop
             //Inject Dal
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //Inject Bl
-            services.AddScoped<IBlCategory, BlCategory>();
+            //services.AddScoped<IBlCategory, BlCategory>();
             services.AddScoped<IBlDictionary<Frequency>, BlDictionary<Frequency>>();
-            services.AddScoped<IBlDictionary<Service>, BlDictionary<Service>>();
+            services.AddScoped<IBlDictionary<Service>, BlService>();
+            services.AddScoped<IBlDictionary<Category>, BlDictionary<Category>>();
 
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
