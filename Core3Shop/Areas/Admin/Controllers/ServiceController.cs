@@ -14,9 +14,9 @@ namespace Core3Shop.Areas.Admin.Controllers
     [Area(AreaNames.Admin)]
     public class ServiceController : Controller
     {
-        private readonly IBlDictionary<Service> _blService;
+        private readonly IBlService _blService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ServiceController(IBlDictionary<Service> blService, IWebHostEnvironment webHostEnvironment)
+        public ServiceController(IBlService blService, IWebHostEnvironment webHostEnvironment)
         {
             _blService = blService;
             _webHostEnvironment = webHostEnvironment;
@@ -52,7 +52,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = (_blService as Bl.BlService).GetAll() });
+            return Json(new { data = _blService.GetAll() });
         }
         [HttpDelete]
         public IActionResult Delete(int id)

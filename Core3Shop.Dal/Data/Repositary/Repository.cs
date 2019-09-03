@@ -44,7 +44,7 @@ namespace Core3Shop.Dal.Data.Repositary
             {
                 foreach (var includeProperty in includeProperties)
                 {
-                    query.Include(includeProperty);
+                    query = query.Include(includeProperty);
                 }
             }
             if (orderBy != null)

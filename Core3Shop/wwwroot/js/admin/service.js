@@ -12,7 +12,7 @@ function loadDataTable() {
             "datatype":"json"
         },
         "columns": [
-            { "data": "name", "width": "50%" },
+            { "data": "name", "width": "30%" },
             { "data": "category.name", "width": "20%" },
             { "data": "price", "width": "15%" },
             { "data": "frequency.timesPerYear", "width": "15%" },

@@ -1,4 +1,5 @@
-﻿using Core3Shop.Dal.Data.Repositary.Contracts;
+﻿using Core3Shop.Bl.Contracts;
+using Core3Shop.Dal.Data.Repositary.Contracts;
 using Core3Shop.Dal.Data.Repository.Contracts;
 using Core3Shop.Models;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Core3Shop.Bl
 {
-    public class BlService : BlDictionary<Service>
+    public class BlService : BlDictionary<Service>, IBlService
     {
         private IUnitOfWork _unitOfWork;
         private IRepository<Service> _repository;
@@ -18,7 +19,8 @@ namespace Core3Shop.Bl
         }
         public new IEnumerable<Service> GetAll()
         {
-            return _unitOfWork.Services.Find(includeProperties:new List<string> { nameof(Category),nameof(Frequency) });
+
+            return _unitOfWork.Services.Find(includeProperties:new List<string> { nameof(Service.Category),nameof(Service.Frequency) });
         }
     }
 }
