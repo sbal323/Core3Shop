@@ -1,4 +1,5 @@
 ﻿using Core3Shop.Bl.Contracts;
+using Core3Shop.Models;
 using Core3Shop.Models.ViewModels;
 
 namespace Core3Shop.Al.Contracts
@@ -8,5 +9,6 @@ namespace Core3Shop.Al.Contracts
         IBlService BlService { get; }
 
         ServiceViewModel GetServiceModel(int? id);
+        ServiceViewModel GetServiceModel(Service service);
     }
 }

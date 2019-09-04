@@ -51,5 +51,15 @@ namespace Core3Shop.Al
             }
             return model;
         }
+
+        public ServiceViewModel GetServiceModel(Service service)
+        {
+            return new ServiceViewModel()
+            {
+                CategoriesList = GetCategoriesForDropDown(),
+                FrequencyList = GetFrequenciesForDropDown(),
+                Service = service
+            };
+        }
     }
 }

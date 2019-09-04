@@ -38,13 +38,14 @@ namespace Core3Shop.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ServiceViewModel model)
+        public IActionResult Upsert(ServiceViewModel serviceModel)
         {
             if (ModelState.IsValid)
             {
-                _alService.BlService.Save(model.Service);
+                _alService.BlService.Save(serviceModel.Service);
                 return RedirectToAction(nameof(Index));
             }
+            var model = _alService.GetServiceModel(serviceModel.Service);
             return View(model);
         }
         [HttpGet]
