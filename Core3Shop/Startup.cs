@@ -17,6 +17,8 @@ using Core3Shop.Dal.Data.Repositary;
 using Core3Shop.Bl.Contracts;
 using Core3Shop.Bl;
 using Core3Shop.Models;
+using Core3Shop.Al.Contracts;
+using Core3Shop.Al;
 
 namespace Core3Shop
 {
@@ -48,7 +50,8 @@ namespace Core3Shop
             services.AddScoped<IBlDictionary<Frequency>, BlDictionary<Frequency>>();
             services.AddScoped<IBlService, BlService>();
             services.AddScoped<IBlDictionary<Category>, BlDictionary<Category>>();
-
+            //Inject Al
+            services.AddScoped<IAlService, AlService>();
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }

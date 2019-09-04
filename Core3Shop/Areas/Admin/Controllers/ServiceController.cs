@@ -8,17 +8,19 @@ using Core3Shop.Utility.Consts;
 using Core3Shop.Models;
 using Core3Shop.Bl.Contracts;
 using Microsoft.AspNetCore.Hosting;
+using Core3Shop.Models.ViewModels;
+using Core3Shop.Al.Contracts;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
     [Area(AreaNames.Admin)]
     public class ServiceController : Controller
     {
-        private readonly IBlService _blService;
+        private readonly IAlService _alService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ServiceController(IBlService blService, IWebHostEnvironment webHostEnvironment)
+        public ServiceController(IAlService alService, IWebHostEnvironment webHostEnvironment)
         {
-            _blService = blService;
+            _alService = alService;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
@@ -27,42 +29,38 @@ namespace Core3Shop.Areas.Admin.Controllers
         }
         public IActionResult Upsert(int? id)
         {
-            var service = new Service();
-            if (id != null)
+            var model = _alService.GetServiceModel(id);
+            if (id != null && model.Service == null)
             {
-                service = _blService.Get(id.Value);
-                if (service == null)
-                {
-                    return NotFound();
-                }
+                return NotFound();
             }
-            return View(service);
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Service service)
+        public IActionResult Upsert(ServiceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _blService.Save(service);
+                _alService.BlService.Save(model.Service);
                 return RedirectToAction(nameof(Index));
             }
-            return View(service);
+            return View(model);
         }
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _blService.GetAll() });
+            return Json(new { data = _alService.BlService.GetAll() });
         }
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var service = _blService.Get(id);
+            var service = _alService.BlService.Get(id);
             if(service == null)
             {
                 return Json(new { success = false, message = "Service does not exists" });
             }
-            _blService.Delete(id);
+            _alService.BlService.Delete(id);
 
             return Json(new { success = true, message = "Service deleted successfully", service });
         }

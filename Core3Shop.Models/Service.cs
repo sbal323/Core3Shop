@@ -22,7 +22,7 @@ namespace Core3Shop.Models
 
         [DataType(DataType.ImageUrl)]
         [Display(Name = "Image")]
-        public double ImgeUrl { get; set; }
+        public string ImageUrl { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
