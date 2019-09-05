@@ -1,6 +1,7 @@
 ﻿using Core3Shop.Bl.Contracts;
 using Core3Shop.Models;
 using Core3Shop.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace Core3Shop.Al.Contracts
 {
@@ -10,5 +11,6 @@ namespace Core3Shop.Al.Contracts
 
         ServiceViewModel GetServiceModel(int? id);
         ServiceViewModel GetServiceModel(Service service);
+        void ProcessServiceFiles(string webRootPath, IFormFileCollection files, Service service);
     }
 }

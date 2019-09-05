@@ -10,6 +10,7 @@ using Core3Shop.Bl.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using Core3Shop.Models.ViewModels;
 using Core3Shop.Al.Contracts;
+using System.IO;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
@@ -42,6 +43,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                _alService.ProcessServiceFiles(_webHostEnvironment.WebRootPath, HttpContext.Request.Form.Files, serviceModel.Service);
                 _alService.BlService.Save(serviceModel.Service);
                 return RedirectToAction(nameof(Index));
             }

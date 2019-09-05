@@ -2,9 +2,11 @@
 using Core3Shop.Bl.Contracts;
 using Core3Shop.Models;
 using Core3Shop.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -60,6 +62,29 @@ namespace Core3Shop.Al
                 FrequencyList = GetFrequenciesForDropDown(),
                 Service = service
             };
+        }
+        public void ProcessServiceFiles(string webRootPath, IFormFileCollection files, Service service)
+        {
+            if (service.Id != 0)
+            {
+                if (files.Count > 0 && service.ImageUrl != null)
+                {
+                    var oldImagePath = Path.Combine(webRootPath, service.ImageUrl.TrimStart('\\'));
+                    if (File.Exists(oldImagePath))
+                    {
+                        File.Delete(oldImagePath);
+                    }
+                }
+            }
+            if (files.Count > 0)
+            {
+                string fileName = $@"\images\services\{Guid.NewGuid().ToString()}{Path.GetExtension(files[0].FileName)}";
+                using (var fileStream = new FileStream(Path.Combine(webRootPath, fileName.TrimStart('\\')), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+                }
+                service.ImageUrl = fileName;
+            }
         }
     }
 }

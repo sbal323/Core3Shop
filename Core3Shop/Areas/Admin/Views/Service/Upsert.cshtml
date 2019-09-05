@@ -11,6 +11,7 @@
         @if (Model.Service.Id != 0)
         {
             <input type="hidden" asp-for="Service.Id" />
+            <input type="hidden" asp-for="Service.ImageUrl" />
             title = "Edit service";
         }
         <div class="col-12">
@@ -83,12 +84,19 @@
                 </div>
             </div>
         </div>
+        @if (Model.Service.Id != 0)
+        {
+            <div class="col-3">
+                <img src="@Model.Service.ImageUrl" width="100%" class="p-1 border" id="imgBox"/>
+            </div>
+        }
+
     </div>
 </form>
 @section Scripts{ 
 <script>
     function validateFormInput() {
-        if ($("#uploadBox").val() === "") {
+        if ($("#uploadBox").val() === "" && !$("#imgBox").prop('src')) {
             swal.fire({
                 title: "Error",
                 text: "Please, select an image",
