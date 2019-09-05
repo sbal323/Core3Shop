@@ -18,11 +18,10 @@ namespace Core3Shop.Areas.Admin.Controllers
     public class ServiceController : Controller
     {
         private readonly IAlService _alService;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public ServiceController(IAlService alService, IWebHostEnvironment webHostEnvironment)
+
+        public ServiceController(IAlService alService)
         {
             _alService = alService;
-            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -43,8 +42,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _alService.ProcessServiceFiles(_webHostEnvironment.WebRootPath, HttpContext.Request.Form.Files, serviceModel.Service);
-                _alService.BlService.Save(serviceModel.Service);
+                _alService.Upsert(HttpContext.Request.Form.Files, serviceModel.Service);
                 return RedirectToAction(nameof(Index));
             }
             var model = _alService.GetServiceModel(serviceModel.Service);
@@ -63,7 +61,7 @@ namespace Core3Shop.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Service does not exists" });
             }
-            _alService.BlService.Delete(id);
+            _alService.Delete(id, service.ImageUrl);
 
             return Json(new { success = true, message = "Service deleted successfully", service });
         }

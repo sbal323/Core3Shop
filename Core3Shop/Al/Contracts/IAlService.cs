@@ -11,6 +11,7 @@ namespace Core3Shop.Al.Contracts
 
         ServiceViewModel GetServiceModel(int? id);
         ServiceViewModel GetServiceModel(Service service);
-        void ProcessServiceFiles(string webRootPath, IFormFileCollection files, Service service);
+        void Upsert(IFormFileCollection files, Service service);
+        void Delete(int id, string imagePath);
     }
 }
