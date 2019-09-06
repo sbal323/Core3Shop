@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Core3Shop.Models;
 using Core3Shop.Utility.Consts;
+using Core3Shop.Al.Contracts;
 
 namespace Core3Shop.Controllers
 {
@@ -14,15 +15,17 @@ namespace Core3Shop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IAlHome _alHome;
+        public HomeController(ILogger<HomeController> logger, IAlHome alHome)
         {
             _logger = logger;
+            _alHome = alHome;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = _alHome.GetHomeModel();
+            return View(model);
         }
 
         public IActionResult Privacy()
