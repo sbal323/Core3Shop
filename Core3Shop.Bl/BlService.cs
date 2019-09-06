@@ -4,6 +4,7 @@ using Core3Shop.Dal.Data.Repository.Contracts;
 using Core3Shop.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Core3Shop.Bl
@@ -19,8 +20,12 @@ namespace Core3Shop.Bl
         }
         public new IEnumerable<Service> GetAll()
         {
-
-            return _unitOfWork.Services.Find(includeProperties:new List<string> { nameof(Service.Category),nameof(Service.Frequency) });
+            var includeProperties = new List<Expression<Func<Service, object>>>
+            {
+                x => x.Category,
+                x => x.Frequency
+            };
+            return _unitOfWork.Services.GetAllWithInclude(includeProperties);
         }
     }
 }

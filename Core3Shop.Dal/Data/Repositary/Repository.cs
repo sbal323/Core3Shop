@@ -11,41 +11,35 @@ namespace Core3Shop.Dal.Data.Repositary
 {
     public class Repository<T> : IRepository<T> where T: class
     {
-        protected readonly DbContext dbContext;
-        internal DbSet<T> dbSet;
+        protected readonly DbContext _dbContext;
+        internal DbSet<T> _dbSet;
 
         public Repository(DbContext context)
         {
-            dbContext = context;
-            dbSet = dbContext.Set<T>();
+            _dbContext = context;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public void Add(T entity)
         {
-            dbSet.Add(entity);
+            _dbSet.Add(entity);
         }
         public void AddRange(IEnumerable<T> entities)
         {
-            dbSet.AddRange(entities);
+            _dbSet.AddRange(entities);
         }
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            IQueryable<T> query = dbSet.Where(predicate);
+            IQueryable<T> query = _dbSet.AsNoTracking().Where(predicate);
             return query.ToList();
         }
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includeProperties = null)
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, IEnumerable<Expression<Func<T, object>>> includeProperties = null)
         {
-            IQueryable<T> query = dbSet;
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
+            IQueryable<T> query = _dbSet.AsNoTracking();
+            query = query.Where(predicate);
             if (includeProperties != null)
             {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
+                query = Include(includeProperties);
             }
             if (orderBy != null)
             {
@@ -58,31 +52,41 @@ namespace Core3Shop.Dal.Data.Repositary
         }
         public T Get(int id)
         {
-            return dbSet.Find(id);
+            return _dbSet.Find(id);
         }
         public IEnumerable<T> GetAll()
         {
-            return dbSet.ToList();
+            return _dbSet.AsNoTracking().ToList();
+        }
+        public IEnumerable<T> GetAllWithInclude(IEnumerable<Expression<Func<T, object>>> includeProperties)
+        {
+            return Include(includeProperties).ToList();
         }
         public void Remove(T entity)
         {
-            dbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
         public void Remove(int id)
         {
-            dbSet.Remove(Get(id));
+            _dbSet.Remove(Get(id));
         }
         public void RemoveRange(IEnumerable<T> entities)
         {
-            dbSet.RemoveRange(entities);
+            _dbSet.RemoveRange(entities);
         }
         public void Update(T entity)
         {
-            dbSet.Update(entity);
+            _dbSet.Update(entity);
         }
         public void UpdateRange(IEnumerable<T> entities)
         {
-            dbSet.UpdateRange(entities);
+            _dbSet.UpdateRange(entities);
+        }
+        private IQueryable<T> Include(IEnumerable<Expression<Func<T, object>>> includeProperties)
+        {
+            IQueryable<T> query = _dbSet.AsNoTracking();
+            return includeProperties
+                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
     }
 }

@@ -10,7 +10,8 @@ namespace Core3Shop.Dal.Data.Repository.Contracts
     {
         T Get(int id);
         IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>,IOrderedQueryable<T>> orderBy = null, List<string> includeProperties = null);
+        IEnumerable<T> GetAllWithInclude(IEnumerable<Expression<Func<T, object>>> includeProperties);
+        IEnumerable<T> Find(Expression<Func<T, bool>> predicate, Func<IQueryable<T>,IOrderedQueryable<T>> orderBy = null, IEnumerable<Expression<Func<T, object>>> includeProperties = null);
 
         void Add(T entity);
         void AddRange(IEnumerable<T> entities);
