@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Core3Shop.Models;
 using Core3Shop.Utility.Consts;
 using Core3Shop.Al.Contracts;
+using Core3Shop.Managers;
 
 namespace Core3Shop.Controllers
 {
@@ -32,7 +33,17 @@ namespace Core3Shop.Controllers
         {
             return View();
         }
-
+        public IActionResult Details(int id)
+        {
+            var model = _alHome.GetServiceDetailsModel(id);
+            return View(model);
+        }
+        public IActionResult AddToCart(int serviceId)
+        {
+            var session = new SessionManager(HttpContext);
+            session.AddToCart(serviceId);
+            return RedirectToAction(nameof(Index));
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

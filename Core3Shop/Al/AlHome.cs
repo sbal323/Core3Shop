@@ -1,5 +1,6 @@
 ﻿using Core3Shop.Al.Contracts;
 using Core3Shop.Bl.Contracts;
+using Core3Shop.Managers;
 using Core3Shop.Models;
 using Core3Shop.Models.ViewModels;
 using Core3Shop.ViewModels;
@@ -18,10 +19,12 @@ namespace Core3Shop.Al
     {
         private readonly IBlService _blService;
         private readonly IBlDictionary<Category> _blCategory;
-        public AlHome(IBlService blService,  IBlDictionary<Category> blCategory)
+        private IHttpContextAccessor _httpContextAccessor;
+        public AlHome(IBlService blService,  IBlDictionary<Category> blCategory, IHttpContextAccessor httpContextAccessor)
         {
             _blService = blService;
             _blCategory = blCategory;
+            _httpContextAccessor = httpContextAccessor;
         }
         public HomeViewModel GetHomeModel()
         {
@@ -30,6 +33,18 @@ namespace Core3Shop.Al
             {
                 Services = allServices,
                 Categories = _blCategory.GetAll().Where(x=> allServices.Any(y=> y.CategoryId == x.Id)).OrderBy(x=>x.Name).ToList()
+            };
+        }
+        public ServiceDetailsViewModel GetServiceDetailsModel(int id)
+        {
+            var service = _blService.Get(id);
+            var session = new SessionManager(_httpContextAccessor.HttpContext);
+            var cart = session.GetCart();
+            return new ServiceDetailsViewModel()
+            {
+                Service = service,
+                TotalPrice = service.Price * service.Frequency.TimesPerYear,
+                IsInCart = cart.Contains(service.Id)
             };
         }
     }

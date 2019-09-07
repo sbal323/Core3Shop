@@ -39,7 +39,7 @@ namespace Core3Shop.Dal.Data.Repositary
             query = query.Where(predicate);
             if (includeProperties != null)
             {
-                query = Include(includeProperties);
+                query = Include(query, includeProperties);
             }
             if (orderBy != null)
             {
@@ -85,8 +85,12 @@ namespace Core3Shop.Dal.Data.Repositary
         private IQueryable<T> Include(IEnumerable<Expression<Func<T, object>>> includeProperties)
         {
             IQueryable<T> query = _dbSet.AsNoTracking();
+            return Include(query, includeProperties);
+        }
+        private IQueryable<T> Include(IQueryable<T> query, IEnumerable<Expression<Func<T, object>>> includeProperties)
+        {
             return includeProperties
-                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
     }
 }
