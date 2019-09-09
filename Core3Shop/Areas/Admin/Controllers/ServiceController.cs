@@ -61,7 +61,7 @@ namespace Core3Shop.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Service does not exists" });
             }
-            _alService.Delete(id, service.ImageUrl);
+            _alService.Delete(id, service.ServiceModel.ImageUrl);
 
             return Json(new { success = true, message = "Service deleted successfully", service });
         }

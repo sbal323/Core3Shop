@@ -1,5 +1,6 @@
 ﻿using Core3Shop.Al.Contracts;
 using Core3Shop.Bl.Contracts;
+using Core3Shop.Bl.Models;
 using Core3Shop.Models;
 using Core3Shop.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +33,7 @@ namespace Core3Shop.Al
 
             if (id != null)
             {
-                model.Service = BlService.Get(id.Value);
+                model.Service = BlService.Get(id.Value).ServiceModel;
             }
             return model;
         }
@@ -49,7 +50,7 @@ namespace Core3Shop.Al
         public void Upsert(IFormFileCollection files, Service service)
         {
             ProcessServiceFiles(_webHostEnvironment.WebRootPath, files, service);
-            BlService.Save(service);
+            BlService.Save(new ServiceBlModel() { ServiceModel = service });
         }
         public void Delete(int id, string imagePath)
         {

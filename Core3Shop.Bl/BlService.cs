@@ -1,4 +1,5 @@
 ﻿using Core3Shop.Bl.Contracts;
+using Core3Shop.Bl.Models;
 using Core3Shop.Dal.Data.Repositary.Contracts;
 using Core3Shop.Dal.Data.Repository.Contracts;
 using Core3Shop.Models;
@@ -10,7 +11,7 @@ using System.Text;
 
 namespace Core3Shop.Bl
 {
-    public class BlService : BlDictionary<Service>, IBlService
+    public class BlService : IBlService
     {
         private IUnitOfWork _unitOfWork;
         private IRepository<Service> _repository;
@@ -19,24 +20,35 @@ namespace Core3Shop.Bl
                 x => x.Category,
                 x => x.Frequency
             };
-        public BlService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public BlService(IUnitOfWork unitOfWork) {
             _unitOfWork = unitOfWork;
             _repository = unitOfWork.Services;
         }
-        public new IEnumerable<Service> GetAll()
+        public IEnumerable<ServiceBlModel> GetAll()
         {
            
-            return _unitOfWork.Services.GetAllWithInclude(_includeProperties);
+            return _unitOfWork.Services
+                .GetAllWithInclude(_includeProperties)
+                .Select(x=> new ServiceBlModel() {
+                  ServiceModel  = x
+                });
         }
-        public new Service Get(int id)
+        public ServiceBlModel Get(int id)
         {
-            var includeProperties = new List<Expression<Func<Service, object>>>
+            return new ServiceBlModel()
             {
-                x => x.Category,
-                x => x.Frequency
+                ServiceModel = _unitOfWork.Services.Find(x => x.Id == id, includeProperties: _includeProperties).First()
             };
-            return _unitOfWork.Services.Find(x=> x.Id == id, includeProperties: _includeProperties).First();
+        }
+
+        public void Delete(int id)
+        {
+            _repository.Remove(id);
+            _unitOfWork.Save();
+        }
+        public void Save(ServiceBlModel entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

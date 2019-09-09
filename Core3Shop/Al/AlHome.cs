@@ -31,8 +31,8 @@ namespace Core3Shop.Al
             var allServices = _blService.GetAll();
             return new HomeViewModel()
             {
-                Services = allServices,
-                Categories = _blCategory.GetAll().Where(x=> allServices.Any(y=> y.CategoryId == x.Id)).OrderBy(x=>x.Name).ToList()
+                Services = allServices.Select(x=> x.ServiceModel).ToList(),
+                Categories = _blCategory.GetAll().Where(x=> allServices.Any(y=> y.ServiceModel.CategoryId == x.Id)).OrderBy(x=>x.Name).ToList()
             };
         }
         public ServiceDetailsViewModel GetServiceDetailsModel(int id)
@@ -43,8 +43,7 @@ namespace Core3Shop.Al
             return new ServiceDetailsViewModel()
             {
                 Service = service,
-                TotalPrice = service.Price * service.Frequency.TimesPerYear,
-                IsInCart = cart.Contains(service.Id)
+                IsInCart = cart.Contains(service.ServiceModel.Id)
             };
         }
     }

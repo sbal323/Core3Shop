@@ -1,4 +1,4 @@
-﻿using Core3Shop.Models;
+﻿using Core3Shop.Bl.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,7 @@ namespace Core3Shop.ViewModels
 {
     public class ServiceDetailsViewModel
     {
-        public Service Service { get; set; }
+        public ServiceBlModel Service { get; set; }
         public bool IsInCart { get; set; }
-        public double TotalPrice { get; set; }
     }
 }
