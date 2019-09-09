@@ -33,6 +33,15 @@ namespace Core3Shop.Managers
             }
             _context.Session.SetObject(SessionCartKey, servicesList);
         }
+        public void DeleteFromCart(int id)
+        {
+            LoadCart();
+            if (!servicesList.Contains(id))
+            {
+                servicesList.Remove(id);
+                _context.Session.SetObject(SessionCartKey, servicesList);
+            }
+        }
         public List<int> GetCart()
         {
             LoadCart();
