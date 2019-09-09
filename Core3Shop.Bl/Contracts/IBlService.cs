@@ -12,5 +12,6 @@ namespace Core3Shop.Bl.Contracts
         ServiceBlModel Get(int id);
         IEnumerable<ServiceBlModel> GetAll();
         void Save(ServiceBlModel entity);
+        IEnumerable<ServiceBlModel> Get(IEnumerable<int> itemIds);
     }
 }

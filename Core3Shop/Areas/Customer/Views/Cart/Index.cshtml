@@ -1,0 +1,79 @@
+﻿@model Core3Shop.ViewModels.CartViewModel
+
+<form method="post">
+    <div class="backgroundWhite container">
+        <div class="card">
+            <div class="bg-dark card-header text-light m-0 row">
+                <div class="col-12 d-none d-md-block col-md-6">
+                    <i class="fas fa-shopping-cart"></i> Shopping cart
+                </div>
+                <div class="col-12 col-md-4 offset-md-2 text-right">
+                    <a asp-action="Index" asp-controller="Home" asp-area="Customer" class="btn btn-outline-light form-control btn-sm p-2"><i class="fas fa-sync"></i> Continue Shopping</a>
+                </div>
+            </div>
+            <div class="card-body">
+                @foreach (var item in Model.SelectedServices)
+                {
+                    <div class="row">
+                        <div class="d-none d-md-block col-md-2 text-center py-2">
+                            <img class="w-100" src="@item.ServiceModel.ImageUrl" />
+                        </div>
+                        <div class="col-12 col-md-5 text-md-left">
+                            <h5 class="text-right font-weight-bold">@item.ServiceModel.Name</h5>
+                            <h5 class="text-secondary">$@item.ServiceModel.Price</h5>
+                            <h5 class="text-secondary">@item.ServiceModel.Frequency.Name</h5>
+                        </div>
+                        <div class="col-12 col-md-5 row">
+                            <div class="col-6 text-md-right">
+                                <h6 class="text-warning font-weight-bold">$@item.TotalPrice</h6>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-outline-danger" onclick="return onDelete(@item.ServiceModel.Id);">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="row">
+                    <div class="col-12 text-right p-2">
+                        <div class="text-success h5">Total: $@Model.TotalPrice</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 text-right">
+                    @if (Model.TotalPrice == 0)
+                    {
+                        <h5 class="text-primary">The cart is empty</h5>
+                    }
+                    else
+                    {
+                        <a asp-area="Customer" asp-controller="Cart" asp-action="PlaceOrder" class="btn btn-success form-control">Place Order</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        function onDelete(id) {
+            swal.fire({
+                title: "Are you sure you want to delete?",
+                text: "Service will be deleted from the cart",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it"
+            }).then(function (result) {
+                if (result.value) {
+                    window.location = "/Customer/Cart/Remove/?serviceId=" + id;
+                }
+            });
+        }
+    </script>
+}

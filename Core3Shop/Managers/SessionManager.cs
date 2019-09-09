@@ -36,7 +36,7 @@ namespace Core3Shop.Managers
         public void DeleteFromCart(int id)
         {
             LoadCart();
-            if (!servicesList.Contains(id))
+            if (servicesList.Contains(id))
             {
                 servicesList.Remove(id);
                 _context.Session.SetObject(SessionCartKey, servicesList);

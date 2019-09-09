@@ -33,6 +33,17 @@ namespace Core3Shop.Bl
                   ServiceModel  = x
                 });
         }
+        public IEnumerable<ServiceBlModel> Get(IEnumerable<int> itemIds)
+        {
+
+            return _unitOfWork.Services
+                .GetAllWithInclude(_includeProperties)
+                .Where(x=> itemIds.Any(y=> y == x.Id))
+                .Select(x => new ServiceBlModel()
+                {
+                    ServiceModel = x
+                });
+        }
         public ServiceBlModel Get(int id)
         {
             return new ServiceBlModel()

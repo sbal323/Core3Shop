@@ -53,6 +53,7 @@ namespace Core3Shop
             //Inject Al
             services.AddScoped<IAlService, AlService>();
             services.AddScoped<IAlHome, AlHome>();
+            services.AddScoped<IAlCart, AlCart>();
 
 
             services.AddSession(options => {
