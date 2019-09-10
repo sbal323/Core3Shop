@@ -1,4 +1,5 @@
-﻿using Core3Shop.ViewModels;
+﻿using Core3Shop.Models;
+using Core3Shop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Core3Shop.Al.Contracts
     {
         CartViewModel GetCart();
         void RemoveFromCart(int serviceId);
+        PlaceOrderViewModel GetPlaceOrderModel(Order order);
+        void SaveOrder(Order order);
     }
 }

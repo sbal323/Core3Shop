@@ -16,16 +16,19 @@ namespace Core3Shop.Dal.Data.Repositary
             Categories = new CategoryRepository(_dbContext);
             Frequencies = new Repository<Frequency>(_dbContext);
             Services = new Repository<Service>(_dbContext);
+            Orders = new Repository<Order>(_dbContext);
             Repositories = new Dictionary<Type, object>
             {
                 { typeof(Repository<Frequency>), Frequencies },
                 { typeof(Repository<Service>), Services },
-                { typeof(Repository<Category>), Categories }
+                { typeof(Repository<Category>), Categories },
+                { typeof(Repository<Order>), Orders }
             };
         }
         public ICategoryRepository Categories { get; private set; }
         public IRepository<Frequency> Frequencies { get; private set; }
         public IRepository<Service> Services { get; private set; }
+        public IRepository<Order> Orders { get; private set; }
         public Dictionary<Type, object> Repositories { get; private set; }
 
         public void Save()

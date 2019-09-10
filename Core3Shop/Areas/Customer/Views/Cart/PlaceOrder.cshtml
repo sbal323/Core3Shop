@@ -1,0 +1,111 @@
+﻿@model Core3Shop.ViewModels.PlaceOrderViewModel
+
+<form method="post">
+    <div class="backgroundWhite container">
+        <div class="card">
+            <div class="bg-dark card-header text-light m-0 row">
+                <div class="col-12 d-none d-md-block col-md-6">
+                    <i class="fas fa-list"></i> Place Order
+                </div>
+                <div class="col-12 col-md-4 offset-md-2 text-right">
+                    <a asp-action="Index" asp-controller="Cart" asp-area="Customer" class="btn btn-outline-light form-control btn-sm p-2"><i class="fas fa-shopping-cart"></i> Back to Shopping Cart</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-12 col-lg-6">
+                        <h4 class="text-primary">PickUp Details</h4>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.Name"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.Name" class="form-control" />
+                                <span asp-validation-for="Order.Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.Phone"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.Phone" class="form-control" />
+                                <span asp-validation-for="Order.Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.Email"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.Email" class="form-control" />
+                                <span asp-validation-for="Order.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.Address"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.Address" class="form-control" />
+                                <span asp-validation-for="Order.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.City"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.City" class="form-control" />
+                                <span asp-validation-for="Order.City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row pb-1">
+                            <div class="col-3">
+                                <label asp-for="Order.ZipCode"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="Order.ZipCode" class="form-control" />
+                                <span asp-validation-for="Order.ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 offset-lg-1">
+                        <h4 class="text-primary">Order Details</h4>
+                        <ul class="list-group mb-3">
+                            @foreach (var item in Model.SelectedServices)
+                            {
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div>
+                                        <h6>@item.ServiceModel.Name</h6>
+                                        <span class="text-muted">@item.ServiceModel.Frequency.Name</span>
+                                    </div>
+                                    <span class="text-muted">$@item.TotalPrice</span>
+                                </li>
+
+                            }
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <h5 class="text-success">Total</h5>
+                                <h5 class="text-success">$@Model.TotalPrice</h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 text-right">
+                    @if (Model.TotalPrice == 0)
+                    {
+                        <h5 class="text-primary">The cart is empty</h5>
+                    }
+                    else
+                    {
+                        <button type="submit" asp-area="Customer" asp-controller="Cart" asp-action="PlaceOrder" class="btn btn-success form-control"><i class="fas fa-share"></i> Submit</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

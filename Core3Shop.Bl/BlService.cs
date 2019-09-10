@@ -59,7 +59,15 @@ namespace Core3Shop.Bl
         }
         public void Save(ServiceBlModel entity)
         {
-            throw new NotImplementedException();
+            if (entity.ServiceModel.Id == 0)
+            {
+                _repository.Add(entity.ServiceModel);
+            }
+            else
+            {
+                _repository.Update(entity.ServiceModel);
+            }
+            _unitOfWork.Save();
         }
     }
 }

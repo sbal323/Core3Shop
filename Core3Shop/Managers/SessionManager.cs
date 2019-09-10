@@ -42,6 +42,10 @@ namespace Core3Shop.Managers
                 _context.Session.SetObject(SessionCartKey, servicesList);
             }
         }
+        public void EmptyCart()
+        {
+            _context.Session.SetObject(SessionCartKey, new List<int>());
+        }
         public List<int> GetCart()
         {
             LoadCart();

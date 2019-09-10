@@ -51,7 +51,7 @@ namespace Core3Shop.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Json(new { data = _alService.BlService.GetAll() });
+            return Json(new { data = _alService.BlService.GetAll().Select(x=> x.ServiceModel) });
         }
         [HttpDelete]
         public IActionResult Delete(int id)
