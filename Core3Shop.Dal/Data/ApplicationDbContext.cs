@@ -17,5 +17,6 @@ namespace Core3Shop.Dal.Data
         public DbSet<Frequency> Frequencies { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
