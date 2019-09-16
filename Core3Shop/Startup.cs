@@ -51,6 +51,7 @@ namespace Core3Shop
             services.AddScoped<IBlService, BlService>();
             services.AddScoped<IBlDictionary<Category>, BlDictionary<Category>>();
             services.AddScoped<IBlDictionary<Order>, BlDictionary<Order>>();
+            services.AddScoped<IBlUser, BlUser>();
             //Inject Al
             services.AddScoped<IAlService, AlService>();
             services.AddScoped<IAlHome, AlHome>();

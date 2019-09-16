@@ -11,6 +11,7 @@ namespace Core3Shop.Dal.Data.Repositary.Contracts
         ICategoryRepository Categories { get;  }
         IRepository<Frequency> Frequencies { get; }
         IRepository<Service> Services { get; }
+        IUserRepository Users { get; }
 
         void Save();
         IRepository<T> GetDictionaryRepositary<T>() where T : DictionaryBase;

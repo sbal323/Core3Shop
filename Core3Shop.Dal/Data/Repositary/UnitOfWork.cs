@@ -17,6 +17,7 @@ namespace Core3Shop.Dal.Data.Repositary
             Frequencies = new Repository<Frequency>(_dbContext);
             Services = new Repository<Service>(_dbContext);
             Orders = new Repository<Order>(_dbContext);
+            Users = new UserRepository(_dbContext);
             Repositories = new Dictionary<Type, object>
             {
                 { typeof(Repository<Frequency>), Frequencies },
@@ -29,6 +30,7 @@ namespace Core3Shop.Dal.Data.Repositary
         public IRepository<Frequency> Frequencies { get; private set; }
         public IRepository<Service> Services { get; private set; }
         public IRepository<Order> Orders { get; private set; }
+        public IUserRepository Users { get; private set; }
         public Dictionary<Type, object> Repositories { get; private set; }
 
         public void Save()
