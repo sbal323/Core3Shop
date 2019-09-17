@@ -93,7 +93,8 @@ namespace Core3Shop.Areas.Identity.Pages.Account
                     FullName = Input.FullName,
                     PhoneNumber = Input.PhoneNumber,
                     City = Input.City,
-                    State = Input.State
+                    State = Input.State,
+                    EmailConfirmed = true
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -120,12 +121,14 @@ namespace Core3Shop.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        //return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        return RedirectToAction("Index", "User", new { area = AreaNames.Admin });
                     }
                     else
                     {
                         //await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        //return LocalRedirect(returnUrl);
+                        return RedirectToAction("Index", "User", new { area = AreaNames.Admin });
                     }
                 }
                 foreach (var error in result.Errors)

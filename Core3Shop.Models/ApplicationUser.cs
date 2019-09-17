@@ -9,6 +9,7 @@ namespace Core3Shop.Models
     public class ApplicationUser: IdentityUser
     {
         [Required]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
         public string City { get; set; }
         public string State { get; set; }

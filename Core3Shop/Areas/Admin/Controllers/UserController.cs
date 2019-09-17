@@ -24,5 +24,23 @@ namespace Core3Shop.Areas.Admin.Controllers
             var model = _blUser.GetAll(claims.Value);
             return View(model);
         }
+        public IActionResult Lock(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            _blUser.Lock(id);
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult UnLock(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            _blUser.Unlock(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
