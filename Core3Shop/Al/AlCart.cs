@@ -15,9 +15,9 @@ namespace Core3Shop.Al
     public class AlCart : IAlCart
     {
         private readonly IBlService _blService;
-        private readonly IBlDictionary<Order> _blOrder;
+        private readonly IBlOrder _blOrder;
         private IHttpContextAccessor _httpContextAccessor;
-        public AlCart(IBlService blService, IHttpContextAccessor httpContextAccessor, IBlDictionary<Order> blOrder)
+        public AlCart(IBlService blService, IHttpContextAccessor httpContextAccessor, IBlOrder blOrder)
         {
             _blService = blService;
             _blOrder = blOrder;

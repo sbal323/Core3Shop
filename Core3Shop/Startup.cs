@@ -46,17 +46,16 @@ namespace Core3Shop
             //Inject Dal
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //Inject Bl
-            //services.AddScoped<IBlCategory, BlCategory>();
             services.AddScoped<IBlDictionary<Frequency>, BlDictionary<Frequency>>();
             services.AddScoped<IBlService, BlService>();
             services.AddScoped<IBlDictionary<Category>, BlDictionary<Category>>();
-            services.AddScoped<IBlDictionary<Order>, BlDictionary<Order>>();
+            services.AddScoped<IBlOrder, BlOrder>();
             services.AddScoped<IBlUser, BlUser>();
             //Inject Al
             services.AddScoped<IAlService, AlService>();
             services.AddScoped<IAlHome, AlHome>();
             services.AddScoped<IAlCart, AlCart>();
-
+            services.AddScoped<IAlOrder, AlOrder>();
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
