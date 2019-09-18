@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Core3Shop.Utility.Consts;
 using Core3Shop.Models;
 using Core3Shop.Bl.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area(AreaNames.Admin)]
     public class FrequencyController : Controller
     {

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Core3Shop.Al.Contracts;
 using Core3Shop.Bl.Contracts;
 using Core3Shop.Utility.Consts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area(AreaNames.Admin)]
     public class OrderController : Controller
     {

@@ -5,11 +5,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Core3Shop.Bl.Contracts;
 using Core3Shop.Utility.Consts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
     [Area(AreaNames.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class UserController : Controller
     {
         private readonly IBlUser _blUser;

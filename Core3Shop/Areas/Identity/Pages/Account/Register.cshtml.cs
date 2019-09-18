@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Core3Shop.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize(Roles = Roles.Admin)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

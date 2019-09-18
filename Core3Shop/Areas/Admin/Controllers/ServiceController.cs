@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Hosting;
 using Core3Shop.Models.ViewModels;
 using Core3Shop.Al.Contracts;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Core3Shop.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area(AreaNames.Admin)]
     public class ServiceController : Controller
     {
