@@ -40,8 +40,8 @@ namespace Core3Shop
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI(UIFramework.Bootstrap4);
+                .AddDefaultTokenProviders();
+                //.AddDefaultUI(UIFramework.Bootstrap4);
 
             //Inject Dal
             services.AddScoped<IUnitOfWork, UnitOfWork>();
