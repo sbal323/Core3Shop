@@ -99,11 +99,6 @@ namespace Core3Shop.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if(!await _roleManager.RoleExistsAsync(Roles.Admin))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.Admin));
-                        await _roleManager.CreateAsync(new IdentityRole(Roles.Manager));
-                    }
                     string selectedRole = Request.Form["rbRole"].ToString();
                     await _userManager.AddToRoleAsync(user, selectedRole);
                     _logger.LogInformation("User created a new account with password.");
